@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>창원파티마병원 병원생활안내</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0056a0;
+            --primary-light: #eef5fc;
+            --secondary: #27ae60;
+            --accent: #d9383a;
+            --yt-red: #e62117;
+            --dark: #2c3e50;
+            --border: #e2e8f0;
+            --shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+        }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            line-height: 1.75;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f6f9;
+            word-break: keep-all;
+        }
+
+        /* 상단 헤더 */
+        .header {
+            background: linear-gradient(135deg, var(--primary), #003666);
+            color: #fff;
+            padding: 20px 16px;
+            text-align: center;
+        }
+        .header h1 { margin: 0; font-size: 1.25rem; font-weight: 700; letter-spacing: -0.5px; }
+        .header p { margin: 4px 0 0; font-size: 0.85rem; opacity: 0.85; font-weight: 300; }
+
+        /* 상단 고정(Sticky) 내비게이션 + 동영상 퀵바 통합 */
+        .sticky-top-wrap {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        }
+
+        /* 1단: 본문 섹션 이동 메뉴 */
+        .nav {
+            display: flex;
+            overflow-x: auto;
+            padding: 8px 10px 6px;
+            gap: 6px;
+            max-width: 680px;
+            margin: 0 auto;
+        }
+        .nav::-webkit-scrollbar { display: none; }
+        .nav a {
+            padding: 7px 13px;
+            text-decoration: none;
+            color: #555;
+            font-weight: 700;
+            font-size: 0.81rem;
+            white-space: nowrap;
+            border-radius: 20px;
+            background: #f1f3f5;
+            transition: all 0.2s ease;
+        }
+        .nav a:active, .nav a:focus {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        /* 2단: 상단 고정 동영상 타임스탬프 바로가기 바 */
+        .video-quick-bar {
+            display: flex;
+            align-items: center;
+            overflow-x: auto;
+            padding: 6px 10px 8px;
+            gap: 6px;
+            max-width: 680px;
+            margin: 0 auto;
+            background: #fff8f8;
+            border-top: 1px dashed #fad2d2;
+        }
+        .video-quick-bar::-webkit-scrollbar { display: none; }
+        .vq-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--yt-red);
+            white-space: nowrap;
+            padding-right: 4px;
+        }
+        .vq-btn {
+            border: 1px solid #f5c2c2;
+            background: #fff;
+            color: #c92a2a;
+            font-size: 0.76rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 15px;
+            white-space: nowrap;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+        .vq-btn:hover, .vq-btn:active, .vq-btn.active {
+            background: var(--yt-red);
+            color: #fff;
+            border-color: var(--yt-red);
+        }
+
+        .container {
+            padding: 16px 14px 100px;
+            max-width: 680px;
+            margin: auto;
+        }
+
+        section {
+            margin-bottom: 35px;
+            scroll-margin-top: 105px;
+        }
+
+        .section-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.18rem;
+            color: var(--primary);
+            font-weight: 700;
+            margin: 0;
+        }
+
+        /* 각 섹션 옆에 붙는 동영상 구간 바로가기 버튼 */
+        .sec-video-jump {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: #fff0f0;
+            color: var(--yt-red);
+            border: 1px solid #ffc9c9;
+            padding: 5px 11px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            font-family: inherit;
+        }
+        .sec-video-jump:active, .sec-video-jump:hover {
+            background: var(--yt-red);
+            color: #fff;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 14px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+        .card h3 {
+            margin: 0 0 10px;
+            font-size: 1.02rem;
+            color: var(--dark);
+            border-bottom: 2px solid var(--primary-light);
+            padding-bottom: 6px;
+        }
+        .card h4 {
+            margin: 14px 0 6px;
+            font-size: 0.95rem;
+            color: var(--primary);
+        }
+
+        /* 유튜브 플레이어 및 타임스탬프 박스 스타일 */
+        .video-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+            box-shadow: var(--shadow);
+            border: 2px solid #d0e3f7;
+        }
+        .video-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--primary-light);
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+        }
+        .video-card-header h3 {
+            margin: 0;
+            font-size: 1.05rem;
+            color: var(--primary);
+        }
+        .yt-direct-link {
+            font-size: 0.78rem;
+            color: #fff;
+            background: var(--yt-red);
+            padding: 4px 10px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            background-color: #000;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+        }
+        .video-wrapper img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.92;
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        .yt-play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 68px;
+            height: 48px;
+            background-color: rgba(230, 33, 23, 0.92);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+            pointer-events: none;
+        }
+        .yt-play-btn::after {
+            content: '';
+            border-style: solid;
+            border-width: 10px 0 10px 18px;
+            border-color: transparent transparent transparent #fff;
+            margin-left: 4px;
+        }
+        .yt-guide-badge {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.78);
+            color: #fff;
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 4px;
+            pointer-events: none;
+        }
+
+        /* 동영상 바로가기 타임스탬프 리스트 */
+        .chapter-box {
+            margin-top: 14px;
+            background: #f8fafd;
+            border: 1px solid #dbe7f5;
+            border-radius: 10px;
+            padding: 12px;
+        }
+        .chapter-title {
+            font-size: 0.86rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin: 0 0 10px 0;
+        }
+        .chapter-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+        @media (max-width: 400px) {
+            .chapter-grid { grid-template-columns: 1fr; }
+        }
+        .chapter-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #fff;
+            border: 1px solid #bfd6f2;
+            border-radius: 8px;
+            padding: 10px 12px;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+        }
+        .chapter-btn:hover, .chapter-btn:active, .chapter-btn.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: #fff;
+        }
+        .chapter-left {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .chapter-time {
+            background: var(--primary-light);
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 0.8rem;
+            padding: 2px 7px;
+            border-radius: 4px;
+        }
+        .chapter-btn.active .chapter-time, .chapter-btn:hover .chapter-time {
+            background: #fff;
+            color: var(--primary);
+        }
+        .chapter-label {
+            font-size: 0.86rem;
+            font-weight: 700;
+            color: inherit;
+        }
+        .chapter-play-icon {
+            font-size: 0.75rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+        .chapter-btn.active .chapter-play-icon, .chapter-btn:hover .chapter-play-icon {
+            color: #fff;
+        }
+
+        .local-notice {
+            display: none;
+            margin-top: 10px;
+            padding: 8px 10px;
+            background: #fff8e6;
+            border: 1px solid #ffd885;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            color: #8a6d3b;
+            text-align: center;
+        }
+
+        ul, ol { padding-left: 18px; margin: 8px 0; }
+        li { margin-bottom: 6px; font-size: 0.91rem; }
+
+        .important-box {
+            background: #fff5f5;
+            border-left: 4px solid var(--accent);
+            padding: 10px 12px;
+            border-radius: 6px;
+            font-size: 0.88rem;
+            color: var(--accent);
+            margin: 10px 0;
+            font-weight: 500;
+        }
+
+        .info-badge {
+            display: inline-block;
+            background: var(--primary-light);
+            color: var(--primary);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: 4px;
+            margin-bottom: 6px;
+        }
+
+        /* 표 스타일 */
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            margin-top: 8px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            font-size: 0.83rem;
+        }
+        th {
+            background: var(--primary-light);
+            color: var(--primary);
+            padding: 9px 6px;
+            font-weight: 700;
+            border-bottom: 1px solid var(--border);
+        }
+        td {
+            padding: 9px 6px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+        .sub-cat {
+            display: block;
+            font-size: 0.75rem;
+            color: #666;
+            font-weight: 400;
+        }
+
+        /* 절차 순서도 */
+        .step-container {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin: 10px 0;
+        }
+        .step-item {
+            background: var(--primary-light);
+            border-left: 4px solid var(--primary);
+            padding: 10px 12px;
+            border-radius: 4px;
+            font-size: 0.88rem;
+        }
+
+        /* 플로팅 전화 버튼 */
+        .call-fab {
+            position: fixed;
+            bottom: 20px;
+            right: 16px;
+            background: var(--secondary);
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            box-shadow: 0 4px 16px rgba(39, 174, 96, 0.4);
+            font-weight: 700;
+            z-index: 1001;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.88rem;
+        }
+
+        .footer {
+            background: var(--dark);
+            color: #a0aec0;
+            padding: 30px 16px;
+            text-align: center;
+            font-size: 0.8rem;
+        }
+        .footer b { color: #fff; font-size: 0.92rem; display: block; margin-bottom: 6px; }
+        .footer p { margin: 4px 0; }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>창원파티마병원</h1>
+    <p>환자와 보호자를 위한 안내서 | 병원생활안내</p>
+</div>
+
+<!-- 상단 2단 고정바: 1단(본문 메뉴) + 2단(동영상 구간 바로가기) -->
+<div class="sticky-top-wrap">
+    <div class="nav">
+        <a href="#sec-video">🎬 안내영상</a>
+        <a href="#sec-rights">환자권리·의무</a>
+        <a href="#sec-admission">입원준비</a>
+        <a href="#sec-ward">면회·회진·외출</a>
+        <a href="#sec-system">신포괄·고충처리</a>
+        <a href="#sec-support">취약환자·복지</a>
+        <a href="#sec-surgery">수술촬영·제증명</a>
+        <a href="#sec-safety">화재대처요령</a>
+        <a href="#sec-discharge">퇴원·무인수납</a>
+        <a href="#sec-facility">편의시설·주차</a>
+        <a href="#sec-info">오시는길</a>
+    </div>
+</div>
+
+<div class="container">
+
+    <!-- 0. 병원생활안내 동영상 & 구간 바로가기 섹션 -->
+    <section id="sec-video">
+        <div class="video-card">
+            <div class="video-card-header">
+                <h3>🎬 영상으로 보는 병원생활안내</h3>
+                <a href="https://www.youtube.com/watch?v=_WwMWAtIBSY" target="_blank" rel="noopener noreferrer" class="yt-direct-link">YouTube 앱으로 열기 ↗</a>
+            </div>
+
+            <!-- 동영상 플레이어 영역 -->
+            <div class="video-wrapper" id="yt-player-box" onclick="jumpToVideo(0, -1)">
+                <img src="https://img.youtube.com/vi/_WwMWAtIBSY/hqdefault.jpg" alt="창원파티마병원 입원생활안내 영상">
+                <div class="yt-play-btn"></div>
+                <span class="yt-guide-badge">▶ 터치하면 화면에서 바로 재생됩니다</span>
+            </div>
+
+            <!-- 4대 구간 타임스탬프 바로가기 버튼 박스 -->
+            <div class="chapter-box">
+                <div class="chapter-title">👇 아래 항목을 누르면 해당 시간(구간)으로 즉시 이동하여 재생됩니다</div>
+                <div class="chapter-grid">
+                    <button type="button" class="chapter-btn" id="ch-btn-0" onclick="jumpToVideo(15, 0)">
+                        <div class="chapter-left">
+                            <span class="chapter-time">✔️ 00:15</span>
+                            <span class="chapter-label">입원 준비</span>
+                        </div>
+                        <span class="chapter-play-icon">재생 ▶</span>
+                    </button>
+                    <button type="button" class="chapter-btn" id="ch-btn-1" onclick="jumpToVideo(240, 1)">
+                        <div class="chapter-left">
+                            <span class="chapter-time">✔️ 04:00</span>
+                            <span class="chapter-label">입원 생활</span>
+                        </div>
+                        <span class="chapter-play-icon">재생 ▶</span>
+                    </button>
+                    <button type="button" class="chapter-btn" id="ch-btn-2" onclick="jumpToVideo(572, 2)">
+                        <div class="chapter-left">
+                            <span class="chapter-time">✔️ 09:32</span>
+                            <span class="chapter-label">안전한 병원 생활</span>
+                        </div>
+                        <span class="chapter-play-icon">재생 ▶</span>
+                    </button>
+                    <button type="button" class="chapter-btn" id="ch-btn-3" onclick="jumpToVideo(806, 3)">
+                        <div class="chapter-left">
+                            <span class="chapter-time">✔️ 13:26</span>
+                            <span class="chapter-label">퇴원 준비</span>
+                        </div>
+                        <span class="chapter-play-icon">재생 ▶</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="local-notice" id="local-file-warning">
+                💡 <strong>안내:</strong> 현재 PC 폴더(`file://`)에서 열었습니다. 홈페이지 서버(웹)에 올리면 새 탭이 뜨지 않고 위 화면 안에서 해당 시간부터 바로 재생됩니다.
+            </div>
+        </div>
+    </section>
+
+    <!-- 1. 환자의 권리와 의무 (PDF 2P) -->
+    <section id="sec-rights">
+        <div class="section-header-row">
+            <h2 class="section-title">⚖️ <span>환자의 권리와 의무</span></h2>
+        </div>
+        <div class="card">
+            <span class="info-badge">환자의 권리</span>
+            <ol>
+                <li><strong>진료를 받을 권리:</strong> 환자는 자신의 건강보호와 증진을 위하여 적절한 보건의료서비스를 받을 권리를 갖고, 성별·나이·종교·신분 및 경제적 사정 등을 이유로 건강에 관한 권리를 침해받지 아니하며, 의료인은 정당한 사유 없이 진료를 거부하지 못한다.</li>
+                <li><strong>알권리 및 자기결정권:</strong> 환자는 담당 의사·간호사 등으로부터 질병 상태, 치료 방법, 의학적 연구대상 여부, 장기이식 여부, 부작용 등 예상 결과 및 진료비용에 관하여 충분한 설명을 듣고 자세히 물어 볼 수 있으며, 이에 관한 동의 여부를 결정할 권리를 가진다.</li>
+                <li><strong>비밀을 보호받을 권리:</strong> 환자는 진료와 관련된 신체상·건강상의 비밀과 사생활의 비밀을 침해받지 아니하며, 의료인과 의료기관은 환자의 동의를 받거나 범죄 수사 등 법률에서 정한 경우 외에는 비밀을 누설·발표하지 못한다.</li>
+                <li><strong>상담·조정을 신청할 권리:</strong> 환자는 의료서비스 관련 분쟁이 발생할 경우, 한국의료분쟁조정중재원 등에 상담 및 조정 신청을 할 수 있다.</li>
+                <li><strong>안전한 의료환경에서 의료서비스를 제공받을 권리:</strong> 환자의 진료정보가 보호되고 환자 안전이 유지되는 의료기관에서 의료서비스를 제공받을 권리를 가진다.</li>
+            </ol>
+            
+            <span class="info-badge" style="margin-top:10px;">환자의 의무</span>
+            <ol>
+                <li><strong>의료인에 대한 신뢰·존중 의무:</strong> 환자는 자신의 건강 관련 정보를 의료인에게 정확히 알리고, 의료인의 치료계획을 신뢰하고 존중하여야 한다.</li>
+                <li><strong>부정한 방법으로 진료를 받지 않을 의무:</strong> 환자는 진료 전에 본인의 신분을 밝혀야 하고, 다른 사람의 명의로 진료를 받는 등 거짓이나 부정한 방법으로 진료를 받지 아니한다.</li>
+            </ol>
+        </div>
+    </section>
+
+    <!-- 2. 입원 안내 (PDF 3P) -->
+    <section id="sec-admission">
+        <div class="section-header-row">
+            <h2 class="section-title">📦 <span>입원 안내 및 준비물</span></h2>
+            <button type="button" class="sec-video-jump" onclick="jumpToVideo(15, 0)">▶ ✔️00:15 입원 준비 영상보기</button>
+        </div>
+        <div class="card">
+            <h3>입원 생활 기본 수칙</h3>
+            <ul>
+                <li><strong>입원수속 시간:</strong> 오후 2시 이후</li>
+                <li>병원 내 <strong>흡연과 음주는 엄격히 금지</strong>되어 있습니다.</li>
+                <li>귀중품이나 현금은 분실하지 않도록 주의해 주십시오. 분실 시 병원은 책임지지 않습니다.</li>
+                <li>입원환자의 안전을 위해 <strong>보호자나 간병인이 상주</strong>해주시기 바랍니다.</li>
+                <li>병실전화는 <strong>270-(1+병실번호)</strong>이며, 수신만 가능합니다. (공중전화 1층 로비)</li>
+                <li><strong>병원규칙 및 준수사항을 위반한 경우 퇴원 조치를 할 수 있습니다:</strong>
+                    <ul>
+                        <li>정당한 사유 없이 의료진의 치료계획에 따르지 않는 경우</li>
+                        <li>무단 외출, 외박을 하는 경우</li>
+                        <li>인가되지 않은 전열기구(버너, 전기난로, 전기그릴 등)를 사용한 경우</li>
+                        <li>외부음식(배달음식)을 반입한 경우 등</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h4>사생활 보호 요구 및 확인 절차</h4>
+            <ul>
+                <li>입원 시 '사생활 보호요청'을 할 수 있습니다.</li>
+                <li>보호요청을 하는 경우 입원사실, 병실안내, 질병명, 개인정보 등이 본인외에는 제공되지 않습니다.</li>
+                <li>입원 중에 사생활 보호가 필요하신 경우 병동에 신청해 주시기 바랍니다.</li>
+            </ul>
+
+            <h4>입원 시 개인준비물품</h4>
+            <div class="important-box">
+                신분증, 세면도구(칫솔, 치약, 비누, 수건), 물컵, 물통, 미끄럽지 않은 실내화, 개인용 화장지 또는 물티슈와<br>
+                <strong>*필요시 체온계, 성인용 기저귀, 보호자용 침구 및 수저 등</strong>을 준비해 주십시오.
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. 면회 / 회진 / 외출 (PDF 4P) -->
+    <section id="sec-ward">
+        <div class="section-header-row">
+            <h2 class="section-title">🏥 <span>면회 · 회진 · 외출 안내</span></h2>
+            <button type="button" class="sec-video-jump" onclick="jumpToVideo(240, 1)">▶ ✔️04:00 입원 생활 영상보기</button>
+        </div>
+        <div class="card">
+            <h3>방문객 면회 금지</h3>
+            <div class="important-box">
+                <strong>상주 보호자 1인 외에는 방문객의 면회를 전면 금지합니다 (주말/공휴일 포함)</strong>
+            </div>
+            <ul>
+                <li><strong>면회 금지:</strong> 편의시설 및 건물 외부공간(옥외정원 포함)등 모든 병원내 구역</li>
+                <li>상주보호자는 외출은 가급적 자제바랍니다. (부득이한 외출 시 개인차량 이용)</li>
+                <li>부득이한 경우 외출시 까페, 식당, 대중목욕탕 등 다중시설 이용은 금지합니다.</li>
+                <li>사회적 거리두기 3단계 이상일 경우 중환자실 및 뇌졸중집중치료실의 정기 면회는 중단합니다.</li>
+            </ul>
+
+            <h3>회진 및 면담</h3>
+            <ul>
+                <li><strong>회진시간:</strong> 오전 8시~10시, 오후 4시~6시</li>
+                <li>회진은 1일 1~2회이며, 시간은 의사의 진료일정에 따라 다를 수 있습니다.</li>
+                <li>진료과장 면담은 담당의나 간호사를 통해 신청해 주시기 바랍니다.</li>
+            </ul>
+
+            <h3>외출 및 외박</h3>
+            <ul>
+                <li>외박은 원칙적으로 허용되지 않습니다.</li>
+                <li>부득이한 경우의 외출은 담당의 또는 간호사에게 신청하고 원무과 사무실 (1층)에서 확인 후 가능합니다.(병원 밖에서 발생한 사안에 대해 병원은 책임지지 않습니다.)</li>
+                <li><strong>환의를 입은 채 병원 밖을 나가지 마십시오.</strong></li>
+                <li><strong>퇴원당일 외출은 허가되지 않습니다.</strong></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- 4. 신포괄수가제 및 불만고충처리 (PDF 5P) -->
+    <section id="sec-system">
+        <div class="section-header-row">
+            <h2 class="section-title">📋 <span>신포괄수가제 및 고충처리</span></h2>
+        </div>
+        <div class="card">
+            <h3>신포괄수가제 안내</h3>
+            <p style="font-size:0.9rem; margin-top:0;">우리병원은 2020년 1월 1일부터 신포괄수가제 시범사업을 실시하고 있습니다.</p>
+            <ul>
+                <li><strong>신포괄수가제란?</strong> 입원기간 동안 발생한 입원료, 처치 등 진료에 필요한 기본적인 서비스는 포괄수가로 묶고, 의사의 수술, 시술 등은 행위별 수가로 별도 보상하는 제도입니다.</li>
+                <li><strong>대상환자:</strong> 건강보험 환자 · 의료급여 환자 (신생아, 장기이식 등 일부 환자 제외)</li>
+                <li><strong>신포괄수가제의 좋은점:</strong> 신포괄수가제 적용 병원은 다른 병원에서 건강보험이 적용되지 않는 부분까지 보험적용이 되어 입원 진료비에 대한 부담이 줄어듭니다.</li>
+                <li><strong>진료비 계산:</strong> 중간진료비의 경우 행위별 수가로 산정되며, 퇴원시점에 주치의의 진단명에 따라 신포괄수가로 변경될 수 있어 진료비의 변동 및 퇴원이 지연되거나 가퇴원이 발생할 수 있습니다.</li>
+            </ul>
+
+            <h3>불만 및 고충처리</h3>
+            <p style="font-size:0.88rem;">병원이용에 있어 불편한 점은 아래의 방법으로 접수할 수 있습니다.</p>
+            <ul>
+                <li><strong>전화접수:</strong> 컨택센터 270-1000</li>
+                <li><strong>면담:</strong> 환자공감디자인팀</li>
+                <li><strong>우편접수:</strong> 창원시 의창구 창이대로 45 고객지원담당자</li>
+                <li><strong>홈페이지:</strong> 고객서비스 고객의 소리</li>
+                <li><strong>고객소리함:</strong> 각 병동 휴게실 및 로비</li>
+            </ul>
+            <p style="font-size:0.8rem; color:#666; margin-bottom:0;">※접수된 민원은 확인 후에 처리결과를 알려 드립니다.</p>
+        </div>
+    </section>
+
+    <!-- 5. 취약환자 지원 및 의료사회복지 (PDF 6P) -->
+    <section id="sec-support">
+        <div class="section-header-row">
+            <h2 class="section-title">🤝 <span>취약환자 지원 및 사회복지</span></h2>
+        </div>
+        <div class="card">
+            <h3>취약환자 지원</h3>
+            <p style="font-size:0.9rem; margin-top:0;">의사소통이 어려운 외국인환자, 장애환자를 위한 지원창구를 운영하고 있습니다.</p>
+            <ul>
+                <li><strong>전화:</strong> 270-1080</li>
+                <li><strong>대상:</strong> 의사소통이 어려운 환자, 장애환자, 미아신고</li>
+                <li><strong>장애환자 편의시설:</strong> 전용 주차장·화장실·접수창구, 경사로, 이동보조장비, 보행보조장비, 촉지도, 점자블록, 시각경보기</li>
+            </ul>
+            <div class="important-box">※ 유괴 및 미아방지를 위해 소아환자를 병원 내에 혼자 두지 마십시오.</div>
+
+            <h3>의료사회복지 상담 서비스</h3>
+            <p style="font-size:0.88rem;">아래의 문제에 대한 지원이 필요한 경우 병원 내 사회복지과에서 상담 서비스를 제공하고 있습니다.</p>
+            <ul>
+                <li><strong>대상:</strong>
+                    <ul>
+                        <li>경제적 어려움으로 진료비를 납부하기 어려운 사람</li>
+                        <li>심리정서적 상담이 필요한 사람</li>
+                        <li>지역사회자원(기초생활수급 및 차상위신청, 장기요양등급신청절차 등)연계가 필요한 사람</li>
+                        <li>그 밖에 사회복지관련 상담이 필요한 사람</li>
+                    </ul>
+                </li>
+                <li><strong>방법:</strong> 의료진을 통해 상담 요청 or 사회복지과 전화 문의</li>
+                <li><strong>위치:</strong> 지하 1층 사회복지과</li>
+                <li><strong>전화:</strong> 055)270-1115~6 | <strong>팩스:</strong> 055) 270-1117</li>
+                <li><strong>상담시간:</strong> 평일(공휴일 제외): 오전 9시 ~ 오후 5시 / 토요일: 오전 9시 ~ 오후 12시</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- 6. 수술 장면 촬영 및 서류발급 (PDF 7P) -->
+    <section id="sec-surgery">
+        <div class="section-header-row">
+            <h2 class="section-title">📄 <span>수술 촬영 · 서류 발급</span></h2>
+        </div>
+        <div class="card">
+            <h3>수술 장면 촬영 안내</h3>
+            <p style="font-size:0.9rem; margin-top:0;">전신마취 등 환자의 의식이 없는 상태에서 수술을 진행할 때, 의료법에서 허용하는 범위 내에서 환자나 보호자가 수술장면 촬영을 요청하실 수 있습니다. (촬영요청서 작성 要)</p>
+            <p style="font-size:0.88rem; font-weight:700; margin-bottom:4px;">촬영 거부 사유:</p>
+            <ol style="font-size:0.88rem;">
+                <li>응급환자 수술</li>
+                <li>생명에 위험이 되거나 신체기능의 장애를 초래하는 질환 환자 수술</li>
+                <li>상급종합병원 지정기준 전문진료질병군에 해당하는 수술</li>
+                <li>전공의 수련에 현저히 저해할 우려가 있다고 판단</li>
+                <li>촬영이 기술적으로 어려운 시점에서 요청하는 경우</li>
+                <li>천재지변, 통신 장애 등 불가항력적인 사유</li>
+            </ol>
+
+            <h3>서류발급 신청</h3>
+            <ul>
+                <li>필요한 서류(진단서, 입원확인서, 소견서 등)는 <strong>퇴원 2~3일 전에 미리 간호사실로 신청</strong>하면 퇴원 당일 발급 받을 수 있습니다.</li>
+            </ul>
+            <div class="important-box">※퇴원당일 신청할 경우 당일 발급이 되지 않습니다.</div>
+            <ul>
+                <li>신청한 서류는 원무과 제증명 창구나 무인퇴원수납기에서 받을 수 있습니다.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- 7. 화재 시 대처요령 (PDF 8P) -->
+    <section id="sec-safety">
+        <div class="section-header-row">
+            <h2 class="section-title">🚨 <span>화재시 대처요령 안내</span></h2>
+            <button type="button" class="sec-video-jump" onclick="jumpToVideo(572, 2)">▶ ✔️09:32 안전한 병원 생활 영상보기</button>
+        </div>
+        <div class="card">
+            <h3>기본 대처요령</h3>
+            <ul>
+                <li>각 병실 및 복도에 비치된 <strong>"대피경로 안내도"</strong>를 숙지하시길 바랍니다.</li>
+                <li>직원의 안내에 따라 피난층으로 대피하여 주십시오.</li>
+                <li>지상으로 대피가 어려운 경우 옥상으로 대피하여 주십시오.</li>
+                <li><strong>엘리베이터는 위험 하므로 계단을 이용하여 주십시오.</strong></li>
+                <li>연기로 앞이 보이지 않을 경우 낮은 자세로 벽을 짚고 이동하십시오.</li>
+            </ul>
+
+            <h4>화재 시 피난요령</h4>
+            <div class="step-container">
+                <div class="step-item"><strong>1.</strong> “불이야”라고 외친다.</div>
+                <div class="step-item"><strong>2.</strong> 발신기(비상벨)를 누른다.</div>
+                <div class="step-item"><strong>3.</strong> 피난동선을 따라 낮은자세로 이동한다.</div>
+                <div class="step-item"><strong>4.</strong> 계단을 이용하여 대피한다.</div>
+            </div>
+
+            <h4>소화기 사용요령</h4>
+            <ol>
+                <li>안전핀을 뽑는다.</li>
+                <li>호스를 불 쪽으로 향한다.</li>
+                <li>손잡이를 눌러 골고루 분사한다.</li>
+            </ol>
+        </div>
+    </section>
+
+    <!-- 8. 퇴원 절차 및 무인수납기 (PDF 9P, 10P) -->
+    <section id="sec-discharge">
+        <div class="section-header-row">
+            <h2 class="section-title">💳 <span>퇴원 절차 및 무인수납기</span></h2>
+            <button type="button" class="sec-video-jump" onclick="jumpToVideo(806, 3)">▶ ✔️13:26 퇴원 준비 영상보기</button>
+        </div>
+        <div class="card">
+            <h3>퇴원 절차</h3>
+            <div class="step-container">
+                <div class="step-item"><strong>퇴원결정 (퇴원예정 1~2일전):</strong> 퇴원 예고 → 퇴원절차 안내</div>
+                <div class="step-item"><strong>퇴원수속 (퇴원당일):</strong> 퇴원심사 종료 문자안내 → 퇴원통보서 제공 → 수납 (전층 무인 퇴원수납기, 1층 원무과)</div>
+                <div class="step-item"><strong>퇴원 (퇴원당일 11시 이전):</strong> 서류확인, 퇴원약 수령 및 퇴원증 제출(간호사실), 복약안내 → 귀가</div>
+            </div>
+            <ul>
+                <li>퇴원수속은 <strong>퇴원당일 오전 11시 이전에 완료</strong>하셔야 합니다.</li>
+                <li>간호사실에서 퇴원수납예정 통지서를 받은 후, 무인 퇴원수납기 또는 원무과 퇴원계 창구에서 입원진료비를 납부하십시오.</li>
+                <li>퇴원 약은 퇴원수속 후 병동 간호사실에 퇴원증을 제시 후 받으십시오.</li>
+                <li>신생아 퇴원 시 아기의 보호자(부 또는 모, 법적 친권자)는 <strong>반드시 신분증을 지참</strong>해 주시기 바랍니다.</li>
+            </ul>
+
+            <h3>가퇴원 안내</h3>
+            <ul>
+                <li>외래 진료시간 이외 또는 퇴원시점의 진단명에 따라 진료비 변동으로 퇴원이 지연될 경우 가퇴원 처리하고 추후 정산해 드립니다.</li>
+                <li>가퇴원 정산은 <strong>평일 17시(토요일 12시)까지</strong> 원무과 퇴원계 창구에서 하실 수 있습니다.</li>
+                <li>가퇴원 정산 시 <strong>가퇴원 수납영수증과 결제하신 카드</strong>를 지참하십시오.</li>
+            </ul>
+
+            <h3>무인 퇴원수납기</h3>
+            <p style="font-size:0.88rem;">신용카드로 퇴원 및 중간 수납 시 무인 퇴원수납기를 이용하시면 더욱 빠르고 편리합니다.</p>
+            <ul>
+                <li><strong>위치:</strong> 전층 중앙 엘리베이터 홀</li>
+                <li><strong>서비스대상:</strong> 퇴원/가퇴원 수납, 중간금 조회 / 수납, 영수증 재발행</li>
+                <li><strong>발급가능서류:</strong> 영수증, 진료비 세부내역서, 제증명 (입원확인서, 진단서, 요양급여의뢰서, 수술확인서, 출생증명서, 소견서, 당뇨환자소모성처방전)</li>
+            </ul>
+            
+            <h4>이용가능시간</h4>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>구분</th>
+                            <th>퇴원</th>
+                            <th>가퇴원</th>
+                            <th>중간금</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>월~금</strong></td>
+                            <td>08:30~18:00</td>
+                            <td>08:30~22:00</td>
+                            <td>08:30~22:00</td>
+                        </tr>
+                        <tr>
+                            <td><strong>토</strong></td>
+                            <td>08:30~14:00</td>
+                            <td>08:30~22:00</td>
+                            <td>08:30~22:00</td>
+                        </tr>
+                        <tr>
+                            <td><strong>일(공휴)</strong></td>
+                            <td style="color:#e74c3c; font-weight:700;">운영안함</td>
+                            <td>08:30~22:00</td>
+                            <td>08:30~22:00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. 편의시설 및 주차 안내 (최신 수정 반영) -->
+    <section id="sec-facility">
+        <div class="section-header-row">
+            <h2 class="section-title">☕ <span>편의시설 및 주차 안내</span></h2>
+        </div>
+        <div class="card">
+            <h3>편의시설 안내</h3>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>구분</th>
+                            <th>위치</th>
+                            <th>이용 시간</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>푸드가든</strong><span class="sub-cat">(푸드코트)</span></td>
+                            <td>지하 1층</td>
+                            <td>월~금 08:30~19:00<br>토·일·공휴일 09:00~18:00</td>
+                        </tr>
+                        <tr>
+                            <td><strong>그린하우스</strong><span class="sub-cat">(베이커리)</span></td>
+                            <td>지하 1층</td>
+                            <td>월~금 08:00~18:30<br>토요일 08:00~15:00</td>
+                        </tr>
+                        <tr>
+                            <td><strong>CU</strong><span class="sub-cat">(편의점)</span></td>
+                            <td>지하 1층</td>
+                            <td>07:00~23:00</td>
+                        </tr>
+                        <tr>
+                            <td><strong>스타벅스</strong><span class="sub-cat">(카페)</span></td>
+                            <td>1층</td>
+                            <td>월~금 07:00~21:00<br>토·일·공휴일 08:00~20:00</td>
+                        </tr>
+                        <tr>
+                            <td><strong>BNK경남은행</strong></td>
+                            <td>1층</td>
+                            <td>월~금 09:00~16:00<br><small style="color:#777;">(점심시간 12:00~13:00)</small></td>
+                        </tr>
+                        <tr>
+                            <td><strong>써브웨이</strong><span class="sub-cat">(카페테리아)</span></td>
+                            <td>2층</td>
+                            <td>08:00~20:00</td>
+                        </tr>
+                        <tr>
+                            <td><strong>K비젼안경</strong></td>
+                            <td>2층</td>
+                            <td>월~금 08:30~18:30<br>토요일 08:30~14:00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4>무인 제증명발급기</h4>
+            <ul>
+                <li><strong>위치:</strong> 1층 로비 중앙출입구 방향</li>
+                <li><strong>이용가능시간:</strong> 매일 08:00 ~ 22:00</li>
+                <li><strong>발급가능서류:</strong> 진료비 세부내역서, 진료비 영수증 재발급, 연말정산용 납입증명서</li>
+            </ul>
+
+            <h3>주차 안내</h3>
+            <div class="important-box">
+                외래 진료(8시간) 및 입·퇴원 당일은 <strong>등록된 차량 1대에 한해 주차료가 면제</strong> 됩니다.
+            </div>
+            <ul>
+                <li><strong>주차료 면제대상:</strong> 외래진료환자, 건강검진 수검자, 입·퇴원 차량, 예약검사 환자</li>
+                <li><strong>면제차량 등록장소:</strong> 외래진료 접수데스크, 진료의뢰센터, 중앙안내</li>
+                <li><strong>주차요금:</strong>
+                    <ul>
+                        <li>최초 30분: 600원 (초과 15분마다: 300원)</li>
+                        <li>1일 24시간 최대요금: 7,000원 (입출입 1회에 한함)</li>
+                        <li><strong>정기주차권 (입원환자 및 보호자 차량):</strong> 5일 - 30,000원, 1개월 - 70,000원</li>
+                        <li><strong>구입문의:</strong> 주차정산소, 원무과</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- 10. 고객응대근로자 보호 및 오시는 길 (PDF 12P) -->
+    <section id="sec-info">
+        <div class="section-header-row">
+            <h2 class="section-title">📍 <span>오시는 길 및 고객보호</span></h2>
+        </div>
+        <div class="card">
+            <h3>고객응대근로자 보호조치</h3>
+            <div class="important-box" style="background:#f0f9ff; border-left-color:var(--primary); color:#004085;">
+                <strong>"따뜻한 말 한마디는 우리 모두를 행복하게 합니다."</strong><br>
+                2018년 10월18일부터 산업안전보건법에 고객응대근로자 보호조치가 시행됩니다. 폭언·폭행 등을 하지 말아주세요.
+            </div>
+
+            <h3>오시는 길</h3>
+            <h4>자가용</h4>
+            <ul>
+                <li><strong>(봉암동/창원대로):</strong> 홈플러스에서 명곡교차로 방면으로 직진한 뒤 두 번째 신호에서 좌회전</li>
+                <li><strong>(창원대):</strong> 명곡교차로 지나 두 번째 신호에서 우회전</li>
+            </ul>
+
+            <h4>대중교통</h4>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>정류소명</th>
+                            <th>버스노선</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>창원공고·파티마병원</strong><br><small>농업기술센터 방면</small></td>
+                            <td>59, 151, 224</td>
+                        </tr>
+                        <tr>
+                            <td><strong>파티마병원</strong><br><small>창원공고·도로교통공단 방면</small></td>
+                            <td>10, 11, 12, 13, 14, 30, 31, 32, 34, 35, 58, 103, 110, 111, 151, 213, 214, 224, 3001</td>
+                        </tr>
+                        <tr>
+                            <td><strong>파티마병원</strong><br><small>종합터미널 방면</small></td>
+                            <td>58, 224</td>
+                        </tr>
+                        <tr>
+                            <td><strong>창원공고·도로교통공단</strong></td>
+                            <td>10, 11, 12, 13, 14, 30, 31, 32, 34, 35, 103, 110, 111, 213, 214, 730, 3001</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<!-- 하단 고정 전화걸기 플로팅 버튼 -->
+<a href="tel:0552701000" class="call-fab">
+    <span>📞</span> 통합컨택센터 (270-1000)
+</a>
+
+<div class="footer">
+    <b>창원파티마병원</b>
+    <p>경남 창원시 의창구 창이대로 45 (51394)</p>
+    <p>통합컨택센터: 270-1000 | www.fatimahosp.co.kr</p>
+    <p>© Changwon Fatima Hospital. All Rights Reserved.</p>
+</div>
+
+<script>
+    // 1. 내 컴퓨터 로컬 파일(file://)로 열었는지 감지
+    if (window.location.protocol === 'file:') {
+        document.getElementById('local-file-warning').style.display = 'block';
+    }
+
+    // 2. 어느 위치에서든 동영상 바로가기 버튼을 누르면 영상 위치로 스크롤 + 해당 초(seconds)부터 재생
+    function jumpToVideo(seconds, btnIndex) {
+        const videoSection = document.getElementById('sec-video');
+        if (videoSection) {
+            videoSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        const quickBtns = document.querySelectorAll('.vq-btn');
+        const chapterBtns = document.querySelectorAll('.chapter-btn');
+        quickBtns.forEach(b => b.classList.remove('active'));
+        chapterBtns.forEach(b => b.classList.remove('active'));
+
+        if (btnIndex >= 0) {
+            if (quickBtns[btnIndex]) quickBtns[btnIndex].classList.add('active');
+            if (chapterBtns[btnIndex]) chapterBtns[btnIndex].classList.add('active');
+        }
+
+        if (window.location.protocol === 'file:') {
+            window.open('https://www.youtube.com/watch?v=_WwMWAtIBSY&t=' + seconds + 's', '_blank');
+            return;
+        }
+
+        const playerBox = document.getElementById('yt-player-box');
+        playerBox.onclick = null;
+        playerBox.innerHTML = `
+            <iframe 
+                src="https://www.youtube.com/embed/_WwMWAtIBSY?start=${seconds}&autoplay=1&playsinline=1&rel=0" 
+                title="창원파티마병원 입원생활안내" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen>
+            </iframe>
+        `;
+    }
+
+    // 3. 상단 메뉴 클릭 시 부드러운 스크롤 이동
+    document.querySelectorAll('.nav a').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
